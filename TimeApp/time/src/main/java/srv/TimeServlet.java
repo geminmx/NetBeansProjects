@@ -21,19 +21,10 @@ public class TimeServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Time</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-            out.println(sdf.format(timeBean.getTime()));
-            out.println("</body>");
-            out.println("</html>");
-        }
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        request.setAttribute("time", sdf.format(timeBean.getTime()));
+        request.getRequestDispatcher("/time.jsp").forward(request,response);
+        
     }
 
 }
